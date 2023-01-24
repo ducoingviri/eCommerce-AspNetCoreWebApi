@@ -21,6 +21,17 @@ builder.Services.AddDbContext<App02DbContext >(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Policy1",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4201",
+                "http://www.localhost:4201");
+        });
+});
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
@@ -63,6 +74,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 // Authentication & Authorization
 app.UseAuthentication();

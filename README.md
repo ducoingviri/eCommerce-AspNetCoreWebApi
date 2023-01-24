@@ -1,6 +1,6 @@
 
 <h1 align="center">
-  eCommerce APIs with .Net 7.0
+  eCommerce APIs with .Net 7.0 and JWT Authentication + Authorization
 </h1>
 
 <h4 align="center">Basic endpoints to implement an eCommerce platform</h4>
@@ -12,7 +12,8 @@ It integrates authentication and authorization using JWT.
 
 ## How To Use
 
-Use your favorite IDE to run this project.
+Use your favorite IDE to run this project locally. Likewise, this project uses MySQL as 
+database engine. You will find database restore file at this directory level at the repo.
 
 > **Note**
 > Consider this repo is at project level, not at solution level.
@@ -168,3 +169,193 @@ Response:
 ]
 ```
 
+### Cases
+
+#### Endpoint to register a product in a branch
+
+```
+Method: Post
+Endpoint: /api/Inventory
+Request Body: 
+{
+  "branchId": 0,
+  "productId": 0
+}
+```
+
+#### Endpoint to relate a product with a client (for only-cart or purchase propose)
+
+```
+Method: Post
+Endpoint: /api/Sale
+Request Body:
+{
+  "aspNetUserId": "string",
+  "productId": 0
+}
+```
+
+## OpenAPI v3.0 Specifications
+
+Next, all the available endpoints in the project.
+
+```
+openapi: "3.0.3"
+info:
+  title: "App02 API"
+  description: "App02 API"
+  version: "1.0.0"
+servers:
+  - url: "https://App02"
+paths:
+  /api/Authenticate/login:
+    post:
+      summary: "POST api/Authenticate/login"
+      responses:
+        "200":
+          description: "OK"
+  /api/Authenticate/register:
+    post:
+      summary: "POST api/Authenticate/register"
+      responses:
+        "200":
+          description: "OK"
+  /api/Authenticate/register-admin:
+    post:
+      summary: "POST api/Authenticate/register-admin"
+      responses:
+        "200":
+          description: "OK"
+  /api/Branch:
+    get:
+      summary: "GET api/Branch"
+      responses:
+        "200":
+          description: "OK"
+    post:
+      summary: "POST api/Branch"
+      responses:
+        "200":
+          description: "OK"
+  /api/Branch/destroy/{id}:
+    delete:
+      summary: "DELETE api/Branch/destroy/{id}"
+      parameters:
+        - name: "id"
+          in: "path"
+      responses:
+        "200":
+          description: "OK"
+  /api/Branch/show:
+    get:
+      summary: "GET api/Branch/show"
+      responses:
+        "200":
+          description: "OK"
+  /api/Branch/update:
+    put:
+      summary: "PUT api/Branch/update"
+      responses:
+        "200":
+          description: "OK"
+  /api/Inventory:
+    get:
+      summary: "GET api/Inventory"
+      responses:
+        "200":
+          description: "OK"
+    put:
+      summary: "PUT api/Inventory"
+      responses:
+        "200":
+          description: "OK"
+    post:
+      summary: "POST api/Inventory"
+      responses:
+        "200":
+          description: "OK"
+  /api/Inventory/show:
+    get:
+      summary: "GET api/Inventory/show"
+      responses:
+        "200":
+          description: "OK"
+  /api/Inventory/{id}:
+    delete:
+      summary: "DELETE api/Inventory/{id}"
+      parameters:
+        - name: "id"
+          in: "path"
+      responses:
+        "200":
+          description: "OK"
+  /api/Product:
+    get:
+      summary: "GET api/Product"
+      responses:
+        "200":
+          description: "OK"
+    post:
+      summary: "POST api/Product"
+      responses:
+        "200":
+          description: "OK"
+  /api/Product/destroy/{id}:
+    delete:
+      summary: "DELETE api/Product/destroy/{id}"
+      parameters:
+        - name: "id"
+          in: "path"
+      responses:
+        "200":
+          description: "OK"
+  /api/Product/find-by-description:
+    get:
+      summary: "GET api/Product/find-by-description"
+      responses:
+        "200":
+          description: "OK"
+  /api/Product/show:
+    get:
+      summary: "GET api/Product/show"
+      responses:
+        "200":
+          description: "OK"
+  /api/Product/update:
+    put:
+      summary: "PUT api/Product/update"
+      responses:
+        "200":
+          description: "OK"
+  /api/Sale:
+    get:
+      summary: "GET api/Sale"
+      responses:
+        "200":
+          description: "OK"
+    put:
+      summary: "PUT api/Sale"
+      responses:
+        "200":
+          description: "OK"
+    post:
+      summary: "POST api/Sale"
+      responses:
+        "200":
+          description: "OK"
+  /api/Sale/show:
+    get:
+      summary: "GET api/Sale/show"
+      responses:
+        "200":
+          description: "OK"
+  /api/Sale/{id}:
+    delete:
+      summary: "DELETE api/Sale/{id}"
+      parameters:
+        - name: "id"
+          in: "path"
+      responses:
+        "200":
+          description: "OK"
+``` 
